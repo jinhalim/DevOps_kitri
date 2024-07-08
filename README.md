@@ -16,6 +16,9 @@
   - [CI](#ci)
   - [CD , 지속적 전달](#cd--지속적-전달)
   - [CD , 지속적 배포](#cd--지속적-배포)
+  - [CI 서버](#ci-서버)
+  - [스테이징 서버구조](#스테이징-서버구조)
+  - [실습](#실습)
 
 
 ---
@@ -33,7 +36,7 @@
       - Jenkins,GitLab,CI...
 
 ## 실습준비 사항
--  AWS 계정 준비 필요
+-  AWS 계정 준비 필요(jhal1023@naver.com)
 -  GITHUB 계정
 -  DockerHub 계정 (jhal1023@naver.com)
    - [https://hub.docker.com/](https://hub.docker.com/)
@@ -99,6 +102,94 @@
   - 자동으로의 배포는 거의 구현되지 않음.
   - 프로덕션 문제 발생시 애플리케이션 복원 고려
   - 블루-그린 프로덕션 환경 구성 가능
+## CI 서버
+- EC2
+  - 젠킨스
+  - JDK17
+  - 리눅스
+
+## 스테이징 서버구조
+- Tomcat? 뭐였징
+- JDK17
+- 리눅스
+## 실습
+![alt text](./image/image.png)
+![alt text](./image/image2.png)
+![alt text](./image/image3.png)
+![alt text](./image/image4.png)
+![alt text](./image/image5.png)
 
 
 
+![alt text](./image/image7.png)
+
+
+젠킨스 서버에다가 JAVA17 설치
+```shell
+# 시스템 업데이트
+sudo yum update -y
+
+# Amazon Corretto 17 리포지토리 추가
+sudo rpm --import https://yum.corretto.aws/corretto.key
+sudo curl -L -o /etc/yum.repos.d/corretto.repo https://yum.corretto.aws/corretto.repo
+
+# Amazon Corretto 17 설치
+sudo yum install -y java-17-amazon-corretto
+
+# Java 버전 확인
+java -version
+```
+
+젠킨스 설치
+```shell
+# Jenkins 저장소 추가
+sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+
+# Jenkins 설치
+sudo yum install -y jenkins
+```
+
+젠킨스 실행
+```shell
+# Jenkins 서비스 시작
+sudo systemctl start jenkins
+
+# Jenkins 서비스 자동 시작 설정
+sudo systemctl enable jenkins
+```
+
+보안- 방화벽
+![alt text](./image/image8.png)
+![alt text](./image/image9.png)
+
+톰캣 스테이징 서버 
+```shell
+# 시스템 업데이트
+sudo yum update -y
+
+# Amazon Corretto 17 리포지토리 추가
+sudo rpm --import https://yum.corretto.aws/corretto.key
+sudo curl -L -o /etc/yum.repos.d/corretto.repo https://yum.corretto.aws/corretto.repo
+
+# Amazon Corretto 17 설치
+sudo yum install -y java-17-amazon-corretto
+
+# Java 버전 확인
+java -version
+
+```
+
+톰캣 설치
+```shell
+# Tomcat 다운로드
+cd /tmp
+wget https://downloads.apache.org/tomcat/tomcat-9/v9.0.90/bin/apache-tomcat-9.0.90.tar.gz
+
+# Tomcat 디렉토리에 압축 해제
+sudo mkdir /opt/tomcat
+sudo tar xzvf apache-tomcat-9.0.90.tar.gz -C /opt/tomcat --strip-components=1
+
+# Tomcat 실행 권한 설정
+sudo sh -c 'chmod +x /opt/tomcat/bin/*.sh'
+```
