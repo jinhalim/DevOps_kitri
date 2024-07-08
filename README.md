@@ -3,14 +3,19 @@
 
 
 # 1일차
-# 목차
+## 목차
 - [DevOps\_kitri ( 24.07.08 ~ 24.07.10 )](#devops_kitri--240708--240710-)
 - [1일차](#1일차)
-- [목차](#목차)
+  - [목차](#목차)
   - [SW 개발 방법론으로의 DevOps](#sw-개발-방법론으로의-devops)
   - [실습준비 사항](#실습준비-사항)
   - [DevOps 란](#devops-란)
   - [DevOps의 세가지 축](#devops의-세가지-축)
+  - [DevOps 효과](#devops-효과)
+  - [CI/CD](#cicd)
+  - [CI](#ci)
+  - [CD , 지속적 전달](#cd--지속적-전달)
+  - [CD , 지속적 배포](#cd--지속적-배포)
 
 
 ---
@@ -54,3 +59,46 @@
   3. CI (continuous integration) and CD(delivery)
   4. Continuous Deployment
   5. Continuous Monitoring
+    - 위 프로세스는 프로젝트에서 반복적으로 수행됨.
+- 도구(tools)
+  - 팀에서 사용하는 도구와제춤의 선택은 매우 중요
+  - Dev와 Ops를 모두 포함하는 도구 사용
+  - [https://roadmap.sh/devops](https://roadmap.sh/devops)
+## DevOps 효과
+- 팀의 더 나은 협업 및 의사소통
+- 생산까지의 리드타임 단축
+- IaC 로 인프라 비용 절감
+- 자동화로 인한 애플리케이션 오류 감소
+- 새로운 기능 개발에 집중 가능
+
+## CI/CD 
+- `지속적 통합`: CI (Continuous Integration)
+- `지속적인 전달`: CD (Continuous Delivery)
+- `지속적인 배포`: CD (Continuous Deployment)
+
+## CI
+- 자동화된 빌드(테스트 포함)
+- CI 구현 -AA(Application Architect)
+  - SCM -git, SVN,Perforce(P4)
+  - 자동 빌드툴 - jenkins, gitlab CI, TeamCity, Azure Pipelinem, github Actions, Travis CI, AWS codeBuild
+- 커밋 통합 -CI 프로세스의 시작
+  - 애플리케이션 패키지 빌드 - 컴파일, 파일 변환등
+  - 단위 테스트 수행
+  - 정적코드 와 취약성 분석(옵션) - 시큐어 코딩
+## CD , 지속적 전달
+- 스테이징 환경으로 애플리케이션 배포(자동,수동 선택 가능)
+  - 지속적 통합 과정이 완료되면 수행
+  - CI에 의해 패키징된 결과물로 시작
+  - unzip, 서버 시작/중지, 파일 복사, 설정 변경등
+  - 기능 테스트와 인수 테스트 수행
+- CD 구현 도구
+  - 패키지 관리자 - Nexus,ProGet,Artifactory
+  - 구성 관리자
+## CD , 지속적 배포
+- 프로덕션 환경에 배포
+  - 자동으로의 배포는 거의 구현되지 않음.
+  - 프로덕션 문제 발생시 애플리케이션 복원 고려
+  - 블루-그린 프로덕션 환경 구성 가능
+
+
+
